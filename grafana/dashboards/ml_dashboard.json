@@ -431,17 +431,175 @@
     {
       "datasource": {
         "type": "prometheus",
-"uid": "Prometheus"
-},
-"fieldConfig": {
-"defaults": {
-"color": {
-"mode": "palette-classic"
-},
-"custom": {
-"axisLabel": "Среднее время (мс)",
-"axisPlacement": "auto"
-},
-"unit": "ms"
-},
-"overrides":},"gridPos": {"h": 7,"w": 8,"x": 16,"y": 15},"id": 8,"options": {"legend": {"displayMode": "list","placement": "bottom"}},"targets": [{"datasource": {"type": "prometheus","uid": "Prometheus"},"expr": "(sum(rate(flask_http_request_duration_seconds_sum{model_type=~"$ModelType", gender=~"$Gender"}(1m))) / sum(rate(flask_http_request_duration_seconds_count{model_type=~"$ModelType", gender=~"$Gender"}(1m)))) * 1000","legendFormat": "Среднее время обработки","refId": "A"}],"title": "Average Response Duration","type": "timeseries"},{"collapsed": false,"gridPos": {"h": 1,"w": 24,"x": 0,"y": 22},"id": 400,"title": "Probas","type": "row"},{"datasource": {"type": "prometheus","uid": "Prometheus"},"fieldConfig": {"defaults": {"color": {"mode": "palette-classic"},"custom": {"axisLabel": "Вероятность скоринга модели","axisPlacement": "auto"},"unit": "none"},"overrides":},"gridPos": {"h": 8,"w": 24,"x": 0,"y": 23},"id": 9,"options": {"legend": {"displayMode": "table","placement": "right"}},"targets": [{"datasource": {"type": "prometheus","uid": "Prometheus"},"expr": "sum(rate(model_inference_seconds_sum{model_type=~"$ModelType", gender=~"$Gender"}(1m))) by (gender, model_type)","legendFormat": "Распределение: {{gender}} ({{model_type}})","refId": "A"}],"title": "Distribution of Predictions (Probas)","type": "timeseries"}],"refresh": "1s","schemaVersion": 38,"style": "dark","tags":,"templating": {"list": [{"current": {"selected": true,"value": ["lightgbm"]},"datasource": {"type": "prometheus","uid": "Prometheus"},"definition": "label_values(model_inference_seconds_bucket, model_type)","hide": 0,"includeAll": true,"multi": true,"name": "ModelType","options":,"query": {"query": "label_values(model_inference_seconds_bucket, model_type)","refId": "StandardVariableQuery"},"refresh": 1,"regex": "","skipUrlSync": false,"sort": 0,"type": "query"},{"current": {"selected": true,"value": ["male"]},"datasource": {"type": "prometheus","uid": "Prometheus"},"definition": "label_values(model_inference_seconds_bucket, gender)","hide": 0,"includeAll": true,"multi": true,"name": "Gender","options":,"query": {"query": "label_values(model_inference_seconds_bucket, gender)","refId": "StandardVariableQuery"},"refresh": 1,"regex": "","skipUrlSync": false,"sort": 0,"type": "query"}]},"time": {"from": "now-5m","to": "now"},"timepicker": {},"timezone": "","title": "ML Service Performance","uid": "ml_service_performance","version": 1}
+        "uid": "Prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Среднее время (мс)",
+            "axisPlacement": "auto"
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 15
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "Prometheus"
+          },
+          "expr": "(sum(rate(flask_http_request_duration_seconds_sum{model_type=~\"$ModelType\", gender=~\"$Gender\"}[1m])) / sum(rate(flask_http_request_duration_seconds_count{model_type=~\"$ModelType\", gender=~\"$Gender\"}[1m]))) * 1000",
+          "legendFormat": "Среднее время обработки",
+          "refId": "A"
+        }
+      ],
+      "title": "Average Response Duration",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 400,
+      "title": "Probas",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "Prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "Вероятность скоринга модели",
+            "axisPlacement": "auto"
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "Prometheus"
+          },
+          "expr": "sum(rate(model_inference_seconds_sum{model_type=~\"$ModelType\", gender=~\"$Gender\"}[1m])) by (gender, model_type)",
+          "legendFormat": "Распределение: {{gender}} ({{model_type}})",
+          "refId": "A"
+        }
+      ],
+      "title": "Distribution of Predictions (Probas)",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "1s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "value": [
+            "lightgbm"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "Prometheus"
+        },
+        "definition": "label_values(model_inference_seconds_bucket, model_type)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "ModelType",
+        "options": [],
+        "query": {
+          "query": "label_values(model_inference_seconds_bucket, model_type)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "value": [
+            "male"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "Prometheus"
+        },
+        "definition": "label_values(model_inference_seconds_bucket, gender)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "Gender",
+        "options": [],
+        "query": {
+          "query": "label_values(model_inference_seconds_bucket, gender)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "ML Service Performance",
+  "uid": "ml_service_performance",
+  "version": 1
+}
