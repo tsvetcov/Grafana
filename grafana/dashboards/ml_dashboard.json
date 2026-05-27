@@ -558,7 +558,7 @@
           "query": "label_values(model_inference_seconds_bucket, model_type)",
           "refId": "StandardVariableQuery"
         },
-        "refresh": 1,
+        "refresh": 5,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -585,7 +585,7 @@
           "query": "label_values(model_inference_seconds_bucket, gender)",
           "refId": "StandardVariableQuery"
         },
-        "refresh": 1,
+        "refresh": 5,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
