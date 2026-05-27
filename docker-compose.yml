@@ -26,7 +26,6 @@ services:
       - "8089:8089"
     volumes:
       - ./:/mnt/locust
-    # Передаем адрес нашего Flask-приложения как базовый URL
     command: -f /mnt/locust/locustfile.py --host http://ml_service:8000
     networks:
       - webnet
@@ -54,11 +53,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin # Дефолтный пароль для входа
+      - GF_SECURITY_ADMIN_PASSWORD=admin 
     volumes:
       - ./grafana/config.ini:/etc/grafana/grafana.ini
-      - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/default.yaml
-      - ./grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/default.yaml
+      - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
       - ./grafana/dashboards:/var/lib/grafana/dashboards
     networks:
       - webnet
