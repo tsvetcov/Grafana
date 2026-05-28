@@ -465,7 +465,7 @@
             "type": "prometheus",
             "uid": "Prometheus"
           },
-          "expr": "(sum(rate(flask_http_request_duration_seconds_sum{model_type=~\"$ModelType\", gender=~\"$Gender\"}[1m])) / sum(rate(flask_http_request_duration_seconds_count{model_type=~\"$ModelType\", gender=~\"$Gender\"}[1m]))) * 1000",
+          "expr": "histogram_quantile(0.90, sum(rate(model_inference_seconds_bucket[1m])) by (le)) * 1000",
           "legendFormat": "Среднее время обработки",
           "refId": "A"
         }
