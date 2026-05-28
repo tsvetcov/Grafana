@@ -431,6 +431,19 @@
     {
       "datasource": {
         "type": "prometheus",
+      "uid": "Prometheus"
+          },
+          "expr": "histogram_quantile(0.90, sum(rate(model_inference_seconds_bucket{model_type=~\"$ModelType\", gender=~\"$Gender\"}[1m])) by (le)) * 1000",
+          "legendFormat": "Inference Time P90 (Берт)",
+          "refId": "A"
+        }
+      ],
+      "title": "Model Inference Time P90",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
         "uid": "Prometheus"
       },
       "fieldConfig": {
@@ -541,28 +554,23 @@
         "current": {
           "selected": true,
           "value": [
-            "lightgbm"
+            "All"
           ]
         },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "Prometheus"
-        },
-        "definition": "label_values(model_inference_seconds_bucket, model_type)",
         "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "ModelType",
-        "options": [],
-        "query": {
-          "query": "label_values(model_inference_seconds_bucket, model_type)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 5,
-        "regex": "",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          }
+        ],
+        "query": "lightgbm,bert",
         "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
+        "type": "custom"
       },
       {
         "current": {
