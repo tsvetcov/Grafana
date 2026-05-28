@@ -544,25 +544,20 @@
             "$__all"
           ]
         },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "Prometheus"
-        },
-        "definition": "label_values(flask_http_request_duration_seconds_count, model_type)",
         "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "ModelType",
-        "options": [],
-        "query": {
-          "query": "label_values(flask_http_request_duration_seconds_count, model_type)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 5,
-        "regex": "",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          }
+        ],
+        "query": "lightgbm,bert",
         "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
+        "type": "custom"
       },
       {
         "current": {
@@ -571,25 +566,20 @@
             "$__all"
           ]
         },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "Prometheus"
-        },
-        "definition": "label_values(flask_http_request_duration_seconds_count, gender)",
         "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "Gender",
-        "options": [],
-        "query": {
-          "query": "label_values(flask_http_request_duration_seconds_count, gender)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 5,
-        "regex": "",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          }
+        ],
+        "query": "male,female",
         "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
+        "type": "custom"
       }
     ]
   },
